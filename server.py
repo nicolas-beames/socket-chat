@@ -1,11 +1,14 @@
 import threading
 import socket
 
-host = '127.0.0.1'
+# host = '127.0.0.1'
 port = 55555
 
+hostName = socket.gethostname()
+ipAdd = socket.gethostbyname(hostName)
+
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind((host, port))
+server.bind((ipAdd, port))
 server.listen()
 
 clients = []
@@ -47,4 +50,5 @@ def receive():
         thread.start()
 
 print("Server is listening...")
+print(f"IP - {ipAdd}")
 receive()
